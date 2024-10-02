@@ -121,7 +121,7 @@ export function Footer() {
               About
             </FooterLink>
             <FooterLink
-              to='https://www.miruro.com'
+              to='https://www.mangojuice.vercel.app'
               target='_blank'
               title='Domains'
             >
@@ -136,31 +136,21 @@ export function Footer() {
           <Text as='p' $isSub={true}>
             &copy; {year}{' '}
             <a
-              href='https://www.miruro.com'
+              href='https://www.mangojuice.vercel.app'
               rel='noopener noreferrer'
               style={{ color: 'grey' }}
             >
-              miruro.com
+              mangojuice.vercel.app
             </a>{' '}
-            | Website Made by <strong>Miruro no Kuon</strong>
+            | Website Made by <strong>Grape Juice</strong>
           </Text>
           <nav aria-label='Social Links'>
             <SocialIconsWrapper>
               {[
                 {
-                  href: 'https://www.reddit.com/r/miruro',
-                  Icon: FaReddit,
-                  label: 'Reddit',
-                },
-                {
-                  href: 'https://discord.gg/dubRrtfpFn',
+                  href: 'https://discordapp.com/users/712808744278294599',
                   Icon: FaDiscord,
                   label: 'Discord',
-                },
-                {
-                  href: 'https://twitter.com/miruro_official',
-                  Icon: FaTwitter,
-                  label: 'Twitter',
                 },
               ].map(({ href, Icon, label }) => (
                 <ShareButton
@@ -168,7 +158,7 @@ export function Footer() {
                   href={href}
                   target='_blank'
                   rel='noopener noreferrer'
-                  aria-label={`Miruro on ${label}`}
+                  aria-label={`MangoJuice on ${label}`}
                 >
                   <Icon aria-hidden='true' />
                 </ShareButton>
