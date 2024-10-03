@@ -180,7 +180,14 @@ async function fetchFromProxy(url: string, cache: any, cacheKey: string) {
       : url; // Use the direct URL if no proxy is defined
 
     // Proceed with the network request using the proxied or direct URL
-    const response = await axiosInstance.get(proxiedUrl);
+    const config = {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      },
+    };
+    const response = await axiosInstance.get(proxiedUrl, config);
+    
 
     // After obtaining the response, verify it for errors or empty data
     if (
