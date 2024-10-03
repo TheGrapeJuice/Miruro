@@ -176,7 +176,7 @@ async function fetchFromProxy(url: string, cache: any, cacheKey: string) {
 
     // Adjust request parameters based on PROXY_URL's availability
     const requestConfig = PROXY_URL
-      ? { params: { url } } // If PROXY_URL is defined, send the original URL as a parameter
+      ? `https://corsproxy.io/?${encodeURIComponent(url)}` // If PROXY_URL is defined, send the original URL as a parameter
       : {}; // If PROXY_URL is not defined, make a direct request
 
     // Proceed with the network request
