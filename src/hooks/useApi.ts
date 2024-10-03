@@ -174,20 +174,13 @@ async function fetchFromProxy(url: string, cache: any, cacheKey: string) {
       return cachedResponse; // Return the cached response if available
     }
 
-    // Construct the proxied URL using corsproxy.io if PROXY_URL is defined
-    const proxiedUrl = PROXY_URL
-      ? `https://corsproxy.io/?${encodeURIComponent(url)}` // Use corsproxy.io
-      : url; // Use the direct URL if no proxy is defined
+    // Adjust request parameters based on PROXY_URL's availability
+    const requestConfig = PROXY_URL
+      ? { params: { url } } // If PROXY_URL is defined, send the original URL as a parameter
+      : {}; // If PROXY_URL is not defined, make a direct request
 
-    // Proceed with the network request using the proxied or direct URL
-    const config = {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      },
-    };
-    const response = await axiosInstance.get(proxiedUrl, config);
-    
+    // Proceed with the network request
+    const response = await axiosInstance.get(PROXY_URL ? '' : url, requestConfig);
 
     // After obtaining the response, verify it for errors or empty data
     if (
@@ -196,7 +189,8 @@ async function fetchFromProxy(url: string, cache: any, cacheKey: string) {
     ) {
       const errorMessage = response.data.message || 'Unknown server error';
       throw new Error(
-        `Server error: ${response.data.statusCode || response.status} ${errorMessage}`,
+        `Server error: ${response.data.statusCode || response.status
+        } ${errorMessage}`,
       );
     }
 
@@ -209,7 +203,6 @@ async function fetchFromProxy(url: string, cache: any, cacheKey: string) {
     throw error; // Rethrow the error for the caller to handle
   }
 }
-
 
 // Function to fetch anime data
 export async function fetchAdvancedSearch(
